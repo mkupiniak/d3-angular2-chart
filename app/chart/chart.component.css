@@ -1,0 +1,41 @@
+.panel-title,
+.panel-heading {
+  transition: 0.3s;
+}
+
+.panel-title {
+  font-size: 22px;
+}
+
+.panel-heading {
+  padding: 20px 15px;
+}
+
+.wrapper {
+  margin-bottom: 20px;
+}
+
+.wrapper select {
+  margin-right: 10px;
+}
+
+h5 {
+  font-size: 15px;
+}
+
+.activeBtn {
+  border-bottom-width: 3px;
+}
+
+input[type="button"] + input[type="button"] {
+  margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .panel-title {
+    font-size: 18px;
+  }
+  .panel-heading {
+    padding: 10px 15px;
+  }
+}

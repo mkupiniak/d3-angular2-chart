@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Stock prices & trade volume</h3>
+  </div>
+  <div class="panel-body">
+    <div id="chart">
+      <svg width="100%" viewBox="10 0 750 400"></svg>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <div class="wrapper">
+      <h5>Choose company:</h5>
+      <select class="btn btn-default" name="companyName" #sel (change)="changeCompany(sel.value)">
+        <option *ngFor="let c of _companies" [(value)]="c.value">{{ c.name }}</option>
+      </select>
+      <span *ngIf="_isLoading"> Loading data...</span>
+    </div>
+    <div class="wrapper">
+      <h5>Select time period:</h5>
+      <input type="button" [class.activeBtn]="_activeStatus[i]" *ngFor="let t of _timePeriod; let i = index;" class="btn btn-default btn-sm" #btn (click)="setTimePeriod(btn.value); setActiveStatus(i)" value="{{ t.name }}" />
+    </div>
+  </div>
+</div>
