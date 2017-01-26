@@ -19,5 +19,6 @@
       <h5>Select time period:</h5>
       <input type="button" [class.activeBtn]="_activeStatus[i]" *ngFor="let t of _timePeriod; let i = index;" class="btn btn-default btn-sm" #btn (click)="setTimePeriod(btn.value); setActiveStatus(i)" value="{{ t.name }}" />
     </div>
+    <h5 class="text-right"><small>Created by Mateusz Kupiniak 2017 &copy; All rights reserved</small></h5>
   </div>
 </div>
