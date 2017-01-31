@@ -1,23 +1,50 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Stock prices & trade volume</h3>
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title">Stock prices & trade volume</h4>
   </div>
-  <div class="panel-body">
+  <div class="card-block">
     <div id="chart">
       <svg width="100%" viewBox="10 0 750 400"></svg>
     </div>
   </div>
-  <div class="panel-footer">
+  <div class="card-footer">
     <div class="wrapper">
       <h5>Choose company:</h5>
-      <select class="btn btn-default" name="companyName" #sel (change)="changeCompany(sel.value)">
+      <select class="btn btn-secondary" name="companyName" #sel (change)="changeCompany(sel.value)">
         <option *ngFor="let c of _companies" [(value)]="c.value">{{ c.name }}</option>
       </select>
       <span *ngIf="_isLoading"> Loading data...</span>
     </div>
     <div class="wrapper">
       <h5>Select time period:</h5>
-      <input type="button" [class.activeBtn]="_activeStatus[i]" *ngFor="let t of _timePeriod; let i = index;" class="btn btn-default btn-sm" #btn (click)="setTimePeriod(btn.value); setActiveStatus(i)" value="{{ t.name }}" />
+      <input type="button" *ngFor="let t of _timePeriod; let i = index;" [class.activeBtn]="_activeStatus[i]" class="btn btn-secondary btn-sm" #btn (click)="setTimePeriod(btn.value); setActiveStatus(i)" value="{{ t.name }}" />
+    </div>
+    <div class="wrapper">
+      <h5>Or choose from the datepickers below:</h5>
+    </div>
+    <div class="wrapper">
+      <form>
+        <div class="form-group row">
+          <div class="input-group input-group-sm">
+            <label class="col-sm-1 col-form-label" for="dateFromInput"><h5>From</h5></label>
+            <input class="col-sm-2 form-control" placeholder="yyyy-mm-dd" name="dp1" [(ngModel)]="_model1" ngbDatepicker #d1="ngbDatepicker" [maxDate]="_maxDate">
+            <div class="input-group-addon" (click)="d1.toggle()" placement="right" ngbTooltip="Pick start date">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="input-group input-group-sm">
+            <label class="col-sm-1 col-form-label" for="dateToInput"><h5>To</h5></label>
+            <input class="col-sm-2 form-control" placeholder="yyyy-mm-dd" name="dp2" [(ngModel)]="_model2" ngbDatepicker #d2="ngbDatepicker" [maxDate]="_maxDate">
+            <div class="input-group-addon btn btn-secondary" (click)="d2.toggle()" placement="right" ngbTooltip="Pick end date">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </form>
+      <pre>Model1: {{ _model1 | json }}</pre>
+      <pre>Model2: {{ _model2| json }}</pre>
     </div>
     <h5 class="text-right"><small>Created by Mateusz Kupiniak 2017 &copy; All rights reserved</small></h5>
   </div>

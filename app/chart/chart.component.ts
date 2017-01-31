@@ -1,7 +1,9 @@
-import { Component, OnInit, Directive, ElementRef } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { UserService } from "../user-service/user.service";
 
 import * as d3 from "d3";
+
+const now = new Date();
 
 @Component({
   selector: "app-chart",
@@ -9,11 +11,17 @@ import * as d3 from "d3";
   styleUrls: ["./chart.component.css"]
 })
 export class ChartComponent implements OnInit {
-  
-  private _dataArr = [];
+  private _model1;
+  private _model2;
   private _isLoading: boolean = true;
-  private _isSelected: string = "AAPL";
+  private _selectedCompany: string = "AAPL";
   private _activeStatus: Array<boolean> = [];
+
+  private _maxDate = {
+    year: now.getFullYear(), 
+    month: now.getMonth() + 1, 
+    day: now.getDate()
+  };
 
   private _companies: Object[] = [
     { value: "AAPL", name: "Apple" },
@@ -44,10 +52,13 @@ export class ChartComponent implements OnInit {
     this.getCompanyData();
   };
 
+  log(x) {
+    console.log(x);
+  }
+
   getCompanyData() {
     this._userService.getData(this.getOptions())
       .subscribe( data => { 
-        this._dataArr = data;
         this._isLoading = false;
         this.buildChart(data);
       });
@@ -55,15 +66,21 @@ export class ChartComponent implements OnInit {
 
   getOptions() {
     return { 
-      symbol: this._isSelected,
+      symbol: this._selectedCompany,
       startDate: this.startDate,
       endDate: this.endDate
+    };
+  }
+
+  changeDates() {  
+    if (this._model1 && this._model2) {
+      console.log('ok mam dwie wartości model');
     }
   }
 
   changeCompany(sym: string) {
     this._isLoading = true;
-    this._isSelected = sym;
+    this._selectedCompany = sym;
     this.getCompanyData();
   }
 

@@ -13,8 +13,8 @@ export class UserService {
   constructor(private _http: Http) { }
 
   getData(params: Object) {
-    this.buildUrl(params);
-    return this._http.get(this._url)
+    let url = this.buildUrl(params);
+    return this._http.get(url)
       .map( res => res.json());      
   }
 
@@ -27,7 +27,7 @@ export class UserService {
     query = encodeURIComponent(base);
     url = 'https://query.yahooapis.com/v1/public/yql?q=' + query + '&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=';
     
-    this._url = url;
+    return url;
   }
 
 }

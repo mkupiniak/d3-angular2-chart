@@ -27,8 +27,27 @@ h5 {
   border-bottom-width: 3px;
 }
 
+input[type="button"]:hover,
+.input-group-addon:hover {
+  cursor: pointer;
+}
+
+>>> .tooltip-inner {
+  color: #292b2c;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+>>> .tooltip.tooltip-right .tooltip-inner::before {
+  border-right-color: #ccc;
+}
+
 input[type="button"] + input[type="button"] {
   margin-left: 10px;
+}
+
+.card-title {
+  margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
